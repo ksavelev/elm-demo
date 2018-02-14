@@ -115,6 +115,35 @@ type Msg
 
 ---
 
-### ELM architecture
+### ELM architecture - Model - View - Update
 
 ![ELM architecture](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%201.jpg)
+
+---
+
+### Demo - Model - View - Update
+
+[Try ELM](http://elm-lang.org/try)
+
+---
+
+### ELM architecture - Commands
+
+![ELM architecture - Commands](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%202.jpg)
+
+---
+
+### Demo - Commands
+
+[Try ELM](http://elm-lang.org/try)
+
+---
+
+### Sources and Links
+
+- TODO
+- TODO
+
+### Q & A
+
+Questions
