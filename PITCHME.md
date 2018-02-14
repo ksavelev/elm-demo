@@ -115,13 +115,13 @@ type Msg
 
 ---
 
-#### ELM architecture - Model - View - Update
+#### ELM architecture - Model - Update - View
 
 ![ELM architecture](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%201.jpg)
 
 ---
 
-### Demo - Model - View - Update
+### Demo - Model - Update - View
 
 [Try ELM](http://elm-lang.org/try)
 
@@ -213,21 +213,24 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         Isin isin ->
-            { model | isin = isin }
+            { model | isin = isin } |> validate
         Nominal str ->
-            { model | nominal = toStringOrFloat str }
+            { model | nominal = toStringOrFloat str } |> validate
         Price str ->
-            { model | price = toStringOrFloat str }
+            { model | price = toStringOrFloat str } |> validate
         CreateNew ->
             model
             
-validate : Model -> ValidationResult
+validate : Model -> Model
 validate model =
+  let result =
     case (model.isin, model.nominal, model.price) of
     ("", _, _) -> ( "red", "enter isin" )
     (_, StringValue _, _) -> ( "red", "enter nominal" )
     (_, _, StringValue _) -> ( "red", "enter price" )
     (_, _, _) -> ( "green", "OK" )
+  in
+    { model | result = result }
      
 main = 
   let
@@ -257,10 +260,30 @@ main =
 
 ---
 
+### What is not covered
+
+- Subscriptions (websockets)
+- Time-travel debugger (immutability + managed effects)
+- Interop with JavaScript (ports)
+- Package manger (elm-package)
+- Automatic recompilation (elm-reactor)
+
+### Conclusion
+
+- Is this production ready? Not quite
+    - One person development (Evan Czaplicki)
+- So, why?
+    - Fun
+    - Good architecture
+
 ### Sources and Links
 
-- TODO
-- TODO
+- [Home](http://elm-lang.org/)
+- [Try ELM](http://elm-lang.org/try)
+- [Build With ELM](http://builtwithelm.co/)
+- [A curated list of useful Elm tutorials, libraries and software](https://github.com/isRuslan/awesome-elm)
+- [ELM with Bootstrap 4](http://elm-bootstrap.info)
+- Sample code is based on [Form Example](http://elm-lang.org/examples/form)
 
 ---
 
