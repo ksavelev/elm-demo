@@ -259,6 +259,94 @@ main =
 
 ---
 
+### Commands
+
+```elm
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+
+type Msg
+    = Isin String
+    | Nominal String
+    | Price String
+    | CreateNew
+
+type FloatOrString = FloatValue Float | StringValue String
+type alias Model =  { isin : String
+                   , nominal : FloatOrString
+                   , price : FloatOrString
+                   , result: ValidationResult }
+type alias ValidationResult = (String, String)
+
+view : Model -> Html Msg
+view model =
+    let
+      toStringOrEmpty = \x -> case x of
+                                FloatValue v -> toString v
+                                StringValue v -> v
+      nominal = toStringOrEmpty model.nominal
+      price = toStringOrEmpty model.price
+    in
+    div []
+        [ input [ value model.isin, placeholder "ISIN", onInput Isin ] []
+        , input [ value nominal, placeholder "Nominal", onInput Nominal ] []
+        , input [ value price, placeholder "Price", onInput Price ] []
+        , button [ onClick CreateNew ] [ text "New Trade" ]
+        , showValidate model
+        ]
+        
+showValidate : Model -> Html msg
+showValidate model =
+    let
+        (color, message) = model.result
+    in
+    div [ style [ ( "color", color ) ] ] [ text message ]
+
+toStringOrFloat str =
+  case String.toFloat str of
+    Ok v -> FloatValue v
+    Err _ -> StringValue str
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+    case msg of
+        Isin isin ->
+            ({ model | isin = isin } |> validate, Cmd.none)
+        Nominal str ->
+            ({ model | nominal = toStringOrFloat str } |> validate, Cmd.none)
+        Price str ->
+            ({ model | price = toStringOrFloat str } |> validate, Cmd.none)
+        CreateNew ->
+            (model, Cmd.none)
+            
+validate : Model -> Model
+validate model =
+  let result =
+    case (model.isin, model.nominal, model.price) of
+    ("", _, _) -> ( "red", "enter isin" )
+    (_, StringValue _, _) -> ( "red", "enter nominal" )
+    (_, _, StringValue _) -> ( "red", "enter price" )
+    (_, _, _) -> ( "green", "OK" )
+  in
+    { model | result = result }
+     
+main = 
+  let
+    initialModel = Model "" (StringValue "") (StringValue "") ("blue", "enter trade")
+  in
+    Html.program
+      { init = (initialModel, Cmd.none)
+      , view = view
+      , update = update
+      , subscriptions = \_ -> Sub.none }
+```
+
+@[48-59]
+@[72-80]
+
+---
+
 ### What is not covered
 
 - Subscriptions (websockets)
