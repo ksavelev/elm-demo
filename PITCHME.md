@@ -9,7 +9,7 @@ A delightful language for reliable webapps
 - Purely functional domain specific language
 - Front-end only
 - Compiles to JavaScript
-- UI framework (functional reactive, virtual DOM)
+- UI framework (functional, virtual DOM)
 - Runtime (managed effects)
 
 ---
@@ -37,6 +37,7 @@ A delightful language for reliable webapps
 - Persistent data structures
 - Union types (aka algebraic data types)
 - No nulls or undefined
+- Pattern matching
 - Managed effects (commands and subscriptions)
 
 ---
