@@ -127,6 +127,118 @@ type Msg
 
 ---
 
+### Code - Model - View
+
+```elm
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+
+type Msg
+    = Isin String
+    | Nominal String
+    | Price String
+    | CreateNew
+
+view : String -> Html Msg
+view model =
+    div []
+        [ input [ placeholder "ISIN", onInput Isin ] []
+        , input [ placeholder "Nominal", onInput Nominal ] []
+        , input [ placeholder "Price", onInput Price ] []
+        , button [ onClick CreateNew ] [ text "New Trade" ]
+        ]
+      
+main = 
+  view ""
+```
+
+@[1-3]
+@[5-9]
+@[11-18]
+@[20-21]
+
+---
+
+### Code - Model - View - Update
+
+```elm
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+
+type Msg
+    = Isin String
+    | Nominal String
+    | Price String
+    | CreateNew
+
+type FloatOrString = FloatValue Float | StringValue String
+type alias Model =  { isin : String
+                   , nominal : FloatOrString
+                   , price : FloatOrString
+                   , result: ValidationResult }
+type alias ValidationResult = (String, String)
+
+view : Model -> Html Msg
+view model =
+    let
+      toStringOrEmpty = \x -> case x of
+                                FloatValue v -> toString v
+                                StringValue v -> v
+      nominal = toStringOrEmpty model.nominal
+      price = toStringOrEmpty model.price
+    in
+    div []
+        [ input [ value model.isin, placeholder "ISIN", onInput Isin ] []
+        , input [ value nominal, placeholder "Nominal", onInput Nominal ] []
+        , input [ value price, placeholder "Price", onInput Price ] []
+        , button [ onClick CreateNew ] [ text "New Trade" ]
+        , showValidate model
+        ]
+        
+showValidate : Model -> Html msg
+showValidate model =
+    let
+        (color, message) = model.result
+    in
+    div [ style [ ( "color", color ) ] ] [ text message ]
+
+toStringOrFloat str =
+  case String.toFloat str of
+    Ok v -> FloatValue v
+    Err _ -> StringValue str
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        Isin isin ->
+            { model | isin = isin }
+        Nominal str ->
+            { model | nominal = toStringOrFloat str }
+        Price str ->
+            { model | price = toStringOrFloat str }
+        CreateNew ->
+            model
+            
+validate : Model -> ValidationResult
+validate model =
+    case (model.isin, model.nominal, model.price) of
+    ("", _, _) -> ( "red", "enter isin" )
+    (_, StringValue _, _) -> ( "red", "enter nominal" )
+    (_, _, StringValue _) -> ( "red", "enter price" )
+    (_, _, _) -> ( "green", "OK" )
+     
+main = 
+  let
+    initialModel = Model "" (StringValue "") (StringValue "") ("blue", "enter trade")
+  in
+    Html.beginnerProgram { model = initialModel, view = view, update = update }
+```
+
+---
+
+
 ### ELM architecture - Commands
 
 ![ELM architecture - Commands](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%202.jpg)
@@ -143,6 +255,8 @@ type Msg
 
 - TODO
 - TODO
+
+---
 
 ### Q & A
 
