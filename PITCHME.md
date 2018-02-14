@@ -113,6 +113,8 @@ type Msg
     | CreateNew
 ```
 
+---
+
 ### ELM architecture
 
-- Picture
+![ELM architecture](https://github.com/ksavelev/elm-demo/blob/master/ELM Architecture 1.jpg)
