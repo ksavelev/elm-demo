@@ -117,4 +117,4 @@ type Msg
 
 ### ELM architecture
 
-![ELM architecture](https://github.com/ksavelev/elm-demo/blob/master/ELM Architecture 1.jpg)
+![ELM architecture](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%201.jpg)
