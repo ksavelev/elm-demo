@@ -30,6 +30,17 @@ A delightful language for reliable webapps
 
 ---
 
+### Statically-typed language
+
+- Expressions
+- Immutable values
+- Persistent data structures
+- Union types (aka algebraic data types)
+- No nulls or undefined
+- Managed effects (commands and subscriptions)
+
+---
+
 #### Expressions
 
 - list of tuples
@@ -91,6 +102,16 @@ A delightful language for reliable webapps
 ```
 
 ---
+
+#### Union types
+
+```elm
+type Msg
+    = Isin String
+    | Nominal String
+    | Price String
+    | CreateNew
+```
 
 ### ELM architecture
 
