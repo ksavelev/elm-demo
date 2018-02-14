@@ -30,7 +30,8 @@ A delightful language for reliable webapps
 
 ---
 
-### Statically-typed language
+## Statically-typed language
+### Expressions
 
 - list of tuples
 ```elm
@@ -49,6 +50,25 @@ A delightful language for reliable webapps
 ```elm
 > mvs = List.map mv trades
 [150,188.5] : List Float
+```
+
+---
+
+## Statically-typed language
+### Immutable values
+
+- record value
+```elm
+> t = { isin = "DK1234", nominal = 100, price = 1.5 }
+{ isin = "DK1234", nominal = 100, price = 1.5 }
+    : { isin : String, nominal : number, price : Float }
+```
+
+- update field
+```elm
+> t2 = { t | price = 1.45 }
+{ isin = "DK1234", nominal = 100, price = 1.45 }
+    : { isin : String, nominal : number, price : Float }
 ```
 
 ---
