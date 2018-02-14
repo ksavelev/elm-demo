@@ -115,7 +115,7 @@ type Msg
 
 ---
 
-### ELM architecture - Model - View - Update
+#### ELM architecture - Model - View - Update
 
 ![ELM architecture](https://github.com/ksavelev/elm-demo/raw/master/ELM%20Architecture%201.jpg)
 
