@@ -236,8 +236,14 @@ main =
     Html.beginnerProgram { model = initialModel, view = view, update = update }
 ```
 
----
+@[1-3]
+@[5-9]
+@[11-16]
+@[18-32]
+@[34-39]
+@[46-56]
 
+---
 
 ### ELM architecture - Commands
 
