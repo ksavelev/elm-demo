@@ -30,7 +30,6 @@ A delightful language for reliable webapps
 
 ---
 
-### Statically-typed language
 #### Expressions
 
 - list of tuples
@@ -53,38 +52,39 @@ A delightful language for reliable webapps
 
 ---
 
-### Statically-typed language
 #### Immutable values
 
 - record value
 ```elm
 > t = { isin = "DK1234", nominal = 100, price = 1.5 }
 { isin = "DK1234", nominal = 100, price = 1.5 }
-    : { isin : String, nominal : number, price : Float }
+ : { isin : String, nominal : number, price : Float }
 ```
 
 - update field
 ```elm
 > t2 = { t | price = 1.45 }
 { isin = "DK1234", nominal = 100, price = 1.45 }
-    : { isin : String, nominal : number, price : Float }
+ : { isin : String, nominal : number, price : Float }
 ```
 
 ---
 
-### Statically-typed language
 #### Persistent data structures
 
 - persistent list
 ```elm
 > trades = [(100, 1.5), (130, 1.45)]
 [(100,1.5),(130,1.45)] : List ( number, Float )
+```
 
+- added value and created trades 2
+```elm
 > trades2 = (120, 1.52) :: trades
 [(120,1.52),(100,1.5),(130,1.45)] : List ( number, Float )
 ```
 
-- trades3 and trades2 "share" trades
+- added value and created trades 3: trades3 and trades2 "share" trades
 ```elm
 > trades3 = (140, 1.66) :: trades
 [(140,1.66),(100,1.5),(130,1.45)] : List ( number, Float )
