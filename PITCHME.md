@@ -154,7 +154,6 @@ main =
   view ""
 ```
 
-@[1-3]
 @[5-9]
 @[11-18]
 @[20-21]
@@ -240,12 +239,11 @@ main =
     Html.beginnerProgram { model = initialModel, view = view, update = update }
 ```
 
-@[1-3]
 @[5-9]
 @[11-16]
-@[18-32]
-@[34-39]
-@[46-56]
+@[18-33]
+@[34-40]
+@[46-57]
 
 ---
 
@@ -269,6 +267,8 @@ main =
 - Package manger (elm-package)
 - Automatic recompilation (elm-reactor)
 
+---
+
 ### Conclusion
 
 - Is this production ready? Not quite
@@ -276,6 +276,8 @@ main =
 - So, why?
     - Fun
     - Good architecture
+
+---
 
 ### Sources and Links
 
