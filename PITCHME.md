@@ -265,12 +265,14 @@ main =
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Http
 
 type Msg
     = Isin String
     | Nominal String
     | Price String
     | CreateNew
+    | Created (Result Http.Error String)
 
 type FloatOrString = FloatValue Float | StringValue String
 type alias Model =  { isin : String
@@ -318,7 +320,20 @@ update msg model =
         Price str ->
             ({ model | price = toStringOrFloat str } |> validate, Cmd.none)
         CreateNew ->
-            (model, Cmd.none)
+            case model.result of
+              (_, "OK") -> (model, createNewTrade model.isin)
+              (_, _) -> (model, Cmd.none)
+        Created _ ->
+            ({ model | result = ("green", "Created")}, Cmd.none)
+            
+createNewTrade : String -> Cmd Msg
+createNewTrade isin =
+  let
+    url =
+      "http://localhost/savetheworld/api/v1/newTrade?isin=" ++ isin ++ "&nominal=123&price=456"
+  in
+    Http.send Created (Http.getString url)
+
             
 validate : Model -> Model
 validate model =
@@ -342,8 +357,10 @@ main =
       , subscriptions = \_ -> Sub.none }
 ```
 
-@[47-58]
-@[70-78]
+@[6-11]
+@[49-63]
+@[65-71]
+@[85-93]
 
 ---
 
