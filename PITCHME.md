@@ -391,7 +391,9 @@ main =
 - [Build With ELM](http://builtwithelm.co/)
 - [A curated list of useful Elm tutorials, libraries and software](https://github.com/isRuslan/awesome-elm)
 - [ELM with Bootstrap 4](http://elm-bootstrap.info)
+- [Elm in Action Book (MEAP)](https://www.manning.com/books/elm-in-action)
 - Sample code is based on [Form Example](http://elm-lang.org/examples/form)
+- [These slides](https://github.com/ksavelev/elm-demo)
 
 ---
 
