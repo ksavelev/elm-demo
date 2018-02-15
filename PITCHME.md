@@ -32,6 +32,7 @@ A delightful language for reliable webapps
 
 ### Statically-typed language
 
+- Pure Functional
 - Expressions
 - Immutable values
 - Persistent data structures
@@ -376,11 +377,13 @@ main =
 
 ### Conclusion
 
-- Is this production ready? Not quite
-    - One person development (Evan Czaplicki)
 - So, why?
     - Fun
     - Good architecture
+    - Maintainablity
+- Is this production ready?
+    - Not quite
+    - One person development (Evan Czaplicki)
 
 ---
 
